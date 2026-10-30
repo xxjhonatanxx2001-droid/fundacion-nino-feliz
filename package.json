@@ -13,7 +13,10 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.48.1",
     "baileys": "^7.0.0-rc14",
+<<<<<<< HEAD
     "dotenv": "^18.0.9",
+=======
+>>>>>>> 32edda9a72c2d71992b0bd502c7d7d5285060e51
     "express": "^4.21.2",
     "multer": "^2.0.2",
     "qrcode": "^1.5.4",

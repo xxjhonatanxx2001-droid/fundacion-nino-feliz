@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Cargar variables de entorno desde la carpeta raíz
 import { config } from 'dotenv';
 config({ path: '../.env' });
@@ -5,6 +6,11 @@ config({ path: '../.env' });
 import { createClient } from '@supabase/supabase-js';
 
 // Lectura de variables
+=======
+import { createClient } from '@supabase/supabase-js';
+
+// Carga de variables de entorno
+>>>>>>> 32edda9a72c2d71992b0bd502c7d7d5285060e51
 const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '';
 const key = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || '';
 
@@ -18,7 +24,10 @@ export const supabase = createClient(url, key, {
   auth: { persistSession: false }
 });
 
+<<<<<<< HEAD
 // Grupos
+=======
+>>>>>>> 32edda9a72c2d71992b0bd502c7d7d5285060e51
 export const GROUPS = ['padrinos', 'colegios', 'administrativos', 'jovenes', 'otros'];
 
 export const GROUP_LABELS = {
@@ -27,4 +36,8 @@ export const GROUP_LABELS = {
   administrativos: 'Personal administrativo',
   jovenes: 'Jóvenes de estudio superior',
   otros: 'Otros',
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 32edda9a72c2d71992b0bd502c7d7d5285060e51

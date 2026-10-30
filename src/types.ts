@@ -81,6 +81,7 @@ export const GROUP_EMOJIS: Record<Group, string> = {
 };
 
 export async function api<T>(path: string, options?: RequestInit): Promise<T> {
+<<<<<<< HEAD
   // 🔀 Automático: usa la correcta según dónde esté abierta
   const baseUrl = import.meta.env.DEV 
     ? 'http://127.0.0.1:8080'   // 💻 En tu computadora
@@ -95,3 +96,13 @@ export async function api<T>(path: string, options?: RequestInit): Promise<T> {
   if (!res.ok) throw new Error((data as { error?: string }).error || `Error ${res.status}`);
   return data as T;
 }
+=======
+  const res = await fetch(`/api${path}`, {
+    headers: { 'Content-Type': 'application/json' },
+    ...options,
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error((data as { error?: string }).error || `Error ${res.status}`);
+  return data as T;
+}
+>>>>>>> 32edda9a72c2d71992b0bd502c7d7d5285060e51
