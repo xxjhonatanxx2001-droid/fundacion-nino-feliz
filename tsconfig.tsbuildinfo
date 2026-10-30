@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/cardrenderer.ts","./src/main.tsx","./src/types.ts","./src/vite-env.d.ts","./src/components/automation.tsx","./src/components/composer.tsx","./src/components/contacts.tsx","./src/components/history.tsx","./src/components/waconnection.tsx"],"version":"5.9.3"}
