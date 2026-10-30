@@ -283,4 +283,36 @@ const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0', () => {
   console.log(`Servidor de Fundación Niño Feliz corriendo en el puerto ${port}`);
 });
+// ... (Todo el código anterior permanece exactamente igual)
+
+api.post('/campaigns/:id/send', async (req, res) => {
+  const { contact_ids, groups } = req.body || {};
+  let query = supabase.from('contacts').select('*');
+  
+  if (Array.isArray(contact_ids) && contact_ids.length > 0) {
+    query = query.in('id', contact_ids);
+  } else if (Array.isArray(groups) && groups.length > 0) {
+    query = query.in('group_name', groups);
+  } else {
+    return res.status(400).json({ error: 'Selecciona destinatarios o grupos' });
+  }
+
+  const { data: contacts, error } = await query;
+  if (error) return res.status(500).json({ error: error.message });
+  if (!contacts || contacts.length === 0) return res.status(400).json({ error: 'No hay contactos que coincidan' });
+
+  try {
+    const { data: campaign } = await supabase.from('campaigns').select('*').eq('id', req.params.id).single();
+    if (!campaign) return res.status(404).json({ error: 'Campaña no encontrada' });
+
+    // Ejecuta el envío masivo usando el helper de whatsapp.js
+    const result = await sendToContacts(contacts, campaign.body, campaign.media_url);
+    res.json({ ok: true, result });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+export default api;
+
 
