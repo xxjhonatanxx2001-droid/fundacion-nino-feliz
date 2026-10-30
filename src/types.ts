@@ -81,10 +81,16 @@ export const GROUP_EMOJIS: Record<Group, string> = {
 };
 
 export async function api<T>(path: string, options?: RequestInit): Promise<T> {
-  const res = await fetch(`http://127.0.0.1:8080/api/${path}`, {
+  // 🔀 Automático: usa la correcta según dónde esté abierta
+  const baseUrl = import.meta.env.DEV 
+    ? 'http://127.0.0.1:8080'   // 💻 En tu computadora
+    : '';                       // 🌐 En Render (misma dirección del sitio)
+
+  const res = await fetch(`${baseUrl}/api${path}`, {
     headers: { 'Content-Type': 'application/json' },
     ...options,
   });
+
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error((data as { error?: string }).error || `Error ${res.status}`);
   return data as T;
